@@ -95,20 +95,97 @@ def render_search_filters():
                      on_click=on_dialog_close)
 
 def render_input_samples():
-    with st.expander("📝 Input Examples", expanded=True):
-        # Color picker with callback
-        st.color_picker("Pick a Color", 
-                       "#00EEFF", 
+    # Text inputs
+    with st.expander("📝 Text Inputs", expanded=True):
+        st.text_input("Simple Text", 
+                     placeholder="Enter text...", 
+                     key="simple_text",
+                     help="This is a simple text input")
+        st.text_area("Multi-line Text", 
+                    placeholder="Enter long text...", 
+                    height=100,
+                    key="multi_text")
+        st.number_input("Number Input", 
+                       min_value=0, 
+                       max_value=100, 
+                       value=50,
+                       key="number_input")
+        
+    # Selection inputs
+    with st.expander("🔍 Selection Inputs", expanded=True):
+        st.selectbox("Dropdown", 
+                    ["Option 1", "Option 2", "Option 3"],
+                    key="dropdown")
+        st.multiselect("Multi-Select",
+                      ["Item 1", "Item 2", "Item 3", "Item 4"],
+                      key="multi_select")
+        st.radio("Radio Buttons",
+                ["Choice 1", "Choice 2", "Choice 3"],
+                key="radio")
+        
+    # Range inputs
+    with st.expander("📊 Range Inputs", expanded=True):
+        st.slider("Simple Slider",
+                 0, 100, 50,
+                 key="simple_slider")
+        values = st.slider("Range Slider",
+                         0, 100, (25, 75),
+                         key="range_slider")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.checkbox("Checkbox 1", key="cb1")
+            st.checkbox("Checkbox 2", key="cb2")
+        with col2:
+            st.checkbox("Checkbox 3", key="cb3")
+            st.checkbox("Checkbox 4", key="cb4")
+            
+    # Date and time
+    with st.expander("📅 Date & Time", expanded=True):
+        st.date_input("Select Date",
+                     key="date_input")
+        st.time_input("Select Time",
+                     key="time_input")
+        
+    # Color and file
+    with st.expander("🎨 Color & File", expanded=True):
+        st.color_picker("Pick a Color",
+                       "#00EEFF",
                        key="color_picker",
                        on_change=on_color_change)
-        
-        # File uploader with callback
-        st.file_uploader("Upload File", 
+        st.file_uploader("Upload File",
                         type=["txt", "pdf", "png"],
                         key="file_uploader",
                         on_change=on_file_upload)
         
-        # Metrics with dynamic updates
+    # Buttons and download
+    with st.expander("🔘 Buttons & Downloads", expanded=True):
+        col1, col2 = st.columns(2)
+        with col1:
+            st.button("Normal Button",
+                     key="normal_btn",
+                     on_click=lambda: st.success("Normal button clicked!"))
+            if st.download_button("Download File",
+                                "Sample content",
+                                "sample.txt",
+                                key="download_btn"):
+                st.write("Downloaded!")
+        with col2:
+            if st.button("Toggle Button",
+                        type="primary",
+                        key="toggle_btn"):
+                st.write("Primary clicked!")
+                
+    # Progress and status
+    with st.expander("📈 Progress & Status", expanded=True):
+        st.progress(75, text="Loading...")
+        with st.spinner("Processing..."):
+            st.success("Success message")
+            st.info("Info message")
+            st.warning("Warning message")
+            st.error("Error message")
+        
+    # Metrics
+    with st.expander("📊 Metrics", expanded=True):
         col1, col2, col3 = st.columns(3)
         with col1:
             st.metric("Value 1", 
@@ -122,6 +199,32 @@ def render_input_samples():
             st.metric("Value 3", 
                      st.session_state.get('metric3', 123), 
                      st.session_state.get('delta3', 0))
+            
+    # Advanced inputs
+    with st.expander("🔧 Advanced Inputs", expanded=True):
+        st.json({
+            "name": "John Doe",
+            "age": 30,
+            "city": "San Francisco"
+        })
+        
+        st.code("""
+def hello_world():
+    print("Hello, World!")
+        """, language="python")
+        
+        st.markdown("""
+        ### Markdown Example
+        - Point 1
+        - Point 2
+        - Point 3
+        """)
+        
+        tab1, tab2 = st.tabs(["Tab 1", "Tab 2"])
+        with tab1:
+            st.write("Content for tab 1")
+        with tab2:
+            st.write("Content for tab 2")
 
 def render_protein_table():
     # Create sample protein data
