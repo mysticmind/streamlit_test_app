@@ -38,9 +38,9 @@ def on_filter_apply():
     st.session_state.filter_values = current_filters
     st.session_state.show_filters = True
 
-def on_dialog_close():
-    st.session_state.show_filters = False
-    st.rerun()
+def toggle_dialog():
+    if 'show_filters' in st.session_state:
+        st.session_state.show_filters = not st.session_state.show_filters
 
 def on_color_change():
     st.session_state.last_color = st.session_state.color_picker
@@ -86,13 +86,13 @@ def render_search_filters():
                  key="apply_filters", 
                  on_click=on_filter_apply)
         
-        if st.session_state.show_filters:
+        if st.session_state.get('show_filters', False):
             st.markdown("### Selected Filters")
             st.code(json.dumps(st.session_state.filter_values, indent=2), 
                    language="json")
             st.button("Close Dialog", 
                      key="close_dialog", 
-                     on_click=on_dialog_close)
+                     on_click=toggle_dialog)
 
 def render_input_samples():
     # Text inputs
