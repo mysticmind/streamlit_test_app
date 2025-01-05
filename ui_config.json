@@ -1,0 +1,517 @@
+{
+    "layout": {
+        "sidebar": {
+            "components": [
+                {
+                    "type": "expander",
+                    "label": "📁 File Upload",
+                    "key": "sidebar_file_upload",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "file_uploader",
+                            "label": "Upload PDB File",
+                            "key": "file_uploader",
+                            "accept_types": [".pdb"],
+                            "action": "on_file_upload"
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "🔍 Search and Filter Options",
+                    "key": "sidebar_filters",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "text_input",
+                            "label": "Search Residues",
+                            "key": "residue_search",
+                            "default": "",
+                            "placeholder": "e.g., ALA, GLY"
+                        },
+                        {
+                            "type": "multiselect",
+                            "label": "Chain Filter",
+                            "key": "chain_filter",
+                            "options": ["A", "B", "C", "D"],
+                            "default": ["A"]
+                        },
+                        {
+                            "type": "multiselect",
+                            "label": "Secondary Structure",
+                            "key": "sec_structure",
+                            "options": ["Helix", "Sheet", "Loop"],
+                            "default": []
+                        },
+                        {
+                            "type": "slider",
+                            "label": "B-Factor Range",
+                            "key": "b_factor_range",
+                            "min": 0,
+                            "max": 100,
+                            "value": [20, 80]
+                        },
+                        {
+                            "type": "number_input",
+                            "label": "SASA Threshold",
+                            "key": "sasa_threshold",
+                            "min": 0,
+                            "max": 100,
+                            "value": 50
+                        },
+                        {
+                            "type": "checkboxes",
+                            "label": "Display Options",
+                            "key": "display_options",
+                            "items": [
+                                {
+                                    "label": "Show B-Factor",
+                                    "key": "show_bfactor",
+                                    "default": true
+                                },
+                                {
+                                    "label": "Show SASA",
+                                    "key": "show_sasa",
+                                    "default": true
+                                },
+                                {
+                                    "label": "Show Position",
+                                    "key": "show_position",
+                                    "default": true
+                                },
+                                {
+                                    "label": "Show Chain",
+                                    "key": "show_chain",
+                                    "default": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "button",
+                            "label": "Apply Filters",
+                            "key": "apply_filters",
+                            "action": "on_filter_apply"
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "🧪 UI Components Demo",
+                    "key": "ui_components_demo",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "text",
+                            "content": "This section demonstrates all available UI components",
+                            "style": "info"
+                        },
+                        {
+                            "type": "text_input",
+                            "label": "Text Input",
+                            "key": "demo_text_input",
+                            "default": "Type something..."
+                        },
+                        {
+                            "type": "text_area",
+                            "label": "Text Area",
+                            "key": "demo_text_area",
+                            "default": "Multiple lines of text..."
+                        },
+                        {
+                            "type": "number_input",
+                            "label": "Number Input",
+                            "key": "demo_number",
+                            "min": 0,
+                            "max": 100,
+                            "default": 50
+                        },
+                        {
+                            "type": "slider",
+                            "label": "Slider",
+                            "key": "demo_slider",
+                            "min": 0,
+                            "max": 10,
+                            "default": 5
+                        },
+                        {
+                            "type": "select",
+                            "label": "Select Box",
+                            "key": "demo_select",
+                            "options": ["Option 1", "Option 2", "Option 3"],
+                            "default": "Option 1"
+                        },
+                        {
+                            "type": "multiselect",
+                            "label": "Multi-Select",
+                            "key": "demo_multiselect",
+                            "options": ["Choice 1", "Choice 2", "Choice 3", "Choice 4"],
+                            "default": ["Choice 1", "Choice 2"]
+                        },
+                        {
+                            "type": "radio",
+                            "label": "Radio Buttons",
+                            "key": "demo_radio",
+                            "options": ["Radio 1", "Radio 2", "Radio 3"],
+                            "default": "Radio 1"
+                        },
+                        {
+                            "type": "checkbox",
+                            "label": "Single Checkbox",
+                            "key": "demo_checkbox",
+                            "default": true
+                        },
+                        {
+                            "type": "checkboxes",
+                            "label": "Multiple Checkboxes",
+                            "items": [
+                                {
+                                    "label": "Check 1",
+                                    "key": "demo_check1",
+                                    "default": true
+                                },
+                                {
+                                    "label": "Check 2",
+                                    "key": "demo_check2",
+                                    "default": false
+                                }
+                            ]
+                        },
+                        {
+                            "type": "color_picker",
+                            "label": "Color Picker",
+                            "key": "demo_color",
+                            "default": "#00ff00"
+                        },
+                        {
+                            "type": "date_input",
+                            "label": "Date Picker",
+                            "key": "demo_date"
+                        },
+                        {
+                            "type": "time_input",
+                            "label": "Time Picker",
+                            "key": "demo_time"
+                        },
+                        {
+                            "type": "button",
+                            "label": "Regular Button",
+                            "key": "demo_button"
+                        },
+                        {
+                            "type": "download_button",
+                            "label": "Download Button",
+                            "key": "demo_download",
+                            "data": "Sample data",
+                            "filename": "sample.txt"
+                        },
+                        {
+                            "type": "metric",
+                            "label": "Metric",
+                            "value": "42",
+                            "delta": "+2"
+                        },
+                        {
+                            "type": "progress",
+                            "value": 0.7
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "📊 Tabbed Views",
+                    "key": "tabbed_views",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "tabs",
+                            "key": "main_tabs",
+                            "tabs": [
+                                {
+                                    "label": "Tab1",
+                                    "components": [
+                                        {
+                                            "type": "molstar_viewer",
+                                            "key": "structure_viewer"
+                                        },
+                                        {
+                                            "type": "select",
+                                            "label": "View Style",
+                                            "key": "view_style",
+                                            "options": ["Cartoon", "Ball & Stick", "Surface", "Ribbon"],
+                                            "default": "Cartoon"
+                                        },
+                                        {
+                                            "type": "color_picker",
+                                            "label": "Background Color",
+                                            "key": "bg_color",
+                                            "default": "#FFFFFF"
+                                        },
+                                        {
+                                            "type": "slider",
+                                            "label": "Zoom Level",
+                                            "key": "zoom_level",
+                                            "min": 0.5,
+                                            "max": 5.0,
+                                            "default": 1.0
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Tab2",
+                                    "components": [
+                                        {
+                                            "type": "data_table",
+                                            "key": "protein_table"
+                                        },
+                                        {
+                                            "type": "radio",
+                                            "label": "Table View",
+                                            "key": "table_view",
+                                            "options": ["Compact", "Detailed", "Custom"],
+                                            "default": "Compact"
+                                        },
+                                        {
+                                            "type": "multiselect",
+                                            "label": "Columns to Display",
+                                            "key": "table_columns",
+                                            "options": ["Chain", "Residue", "Position", "B-Factor", "SASA"],
+                                            "default": ["Chain", "Residue", "Position"]
+                                        },
+                                        {
+                                            "type": "button",
+                                            "label": "Export Data",
+                                            "key": "export_data",
+                                            "action": "on_export_data"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "main": {
+            "components": [
+                {
+                    "type": "dialog",
+                    "key": "filter_dialog",
+                    "title": "Current Filters"
+                },
+                {
+                    "type": "expander",
+                    "label": "🧬 Mol* Viewer",
+                    "key": "main_structure_viewer",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "molstar_viewer",
+                            "key": "main_structure_viewer",
+                            "height": 600,
+                            "sample_data": {
+                                "type": "rcsb",
+                                "pdb_id": "1LOL",
+                                "default_representation": "cartoon",
+                                "default_color": "chain"
+                            }
+                        },
+                        {
+                            "type": "text",
+                            "content": "Sample structure: Lysozyme (PDB ID: 1LOL)",
+                            "style": "info"
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "⚙️ Applied Filters",
+                    "key": "filter_json_view",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "json_view",
+                            "key": "current_filters_json",
+                            "data_key": "current_filters",
+                            "default": {
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "📊 Structure Data",
+                    "key": "main_data_table",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "data_table",
+                            "key": "structure_table",
+                            "data": {
+                                "columns": ["Chain", "Residue", "Position", "B-Factor", "SASA"],
+                                "sample_data": true
+                            }
+                        },
+                        {
+                            "type": "radio",
+                            "label": "View Mode",
+                            "key": "table_view_mode",
+                            "options": ["Compact", "Detailed"],
+                            "default": "Compact"
+                        },
+                        {
+                            "type": "button",
+                            "label": "Export Table",
+                            "key": "export_table",
+                            "action": "on_export_table"
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "🔬 Structure Analysis",
+                    "key": "structure_analysis",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "tabs",
+                            "key": "analysis_tabs",
+                            "tabs": [
+                                {
+                                    "label": "Ramachandran Plot",
+                                    "components": [
+                                        {
+                                            "type": "plot",
+                                            "key": "ramachandran_plot",
+                                            "plot_type": "scatter",
+                                            "data": {
+                                                "type": "ramachandran",
+                                                "sample_data": true
+                                            }
+                                        },
+                                        {
+                                            "type": "text",
+                                            "content": "Distribution of phi-psi angles for protein backbone conformation analysis",
+                                            "style": "info"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "Secondary Structure",
+                                    "components": [
+                                        {
+                                            "type": "plot",
+                                            "key": "secondary_structure_plot",
+                                            "plot_type": "bar",
+                                            "data": {
+                                                "type": "secondary_structure",
+                                                "sample_data": true
+                                            }
+                                        },
+                                        {
+                                            "type": "metrics",
+                                            "components": [
+                                                {
+                                                    "type": "metric",
+                                                    "label": "α-Helix",
+                                                    "value": "45%",
+                                                    "delta": "Above Average"
+                                                },
+                                                {
+                                                    "type": "metric",
+                                                    "label": "β-Sheet",
+                                                    "value": "32%",
+                                                    "delta": "Normal Range"
+                                                },
+                                                {
+                                                    "type": "metric",
+                                                    "label": "Loops",
+                                                    "value": "23%",
+                                                    "delta": "Below Average"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "B-Factor Analysis",
+                                    "components": [
+                                        {
+                                            "type": "plot",
+                                            "key": "bfactor_plot",
+                                            "plot_type": "line",
+                                            "data": {
+                                                "type": "bfactor_distribution",
+                                                "sample_data": true
+                                            }
+                                        },
+                                        {
+                                            "type": "text",
+                                            "content": "B-factor distribution along the protein chain, indicating flexibility",
+                                            "style": "info"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "expander",
+                    "label": "🧬 Sequence Analysis",
+                    "key": "sequence_analysis",
+                    "expanded": true,
+                    "components": [
+                        {
+                            "type": "columns",
+                            "columns": [
+                                {
+                                    "components": [
+                                        {
+                                            "type": "plot",
+                                            "key": "hydropathy_plot",
+                                            "plot_type": "line",
+                                            "data": {
+                                                "type": "hydropathy",
+                                                "sample_data": true
+                                            }
+                                        },
+                                        {
+                                            "type": "text",
+                                            "content": "Kyte-Doolittle Hydropathy Plot",
+                                            "style": "header"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "components": [
+                                        {
+                                            "type": "plot",
+                                            "key": "amino_acid_composition",
+                                            "plot_type": "bar",
+                                            "data": {
+                                                "type": "aa_composition",
+                                                "sample_data": true
+                                            }
+                                        },
+                                        {
+                                            "type": "text",
+                                            "content": "Amino Acid Composition",
+                                            "style": "header"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text_area",
+                            "label": "Analysis Notes",
+                            "key": "sequence_notes",
+                            "default": "Enter sequence analysis observations here..."
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
