@@ -1,4 +1,4 @@
-"""Streamlit UI Loader with component registry pattern."""
+import json
 from typing import Any, Dict, Optional, Callable
 import streamlit as st
 from ui_components import (
@@ -13,7 +13,6 @@ class UILoader:
     
     def __init__(self, config_path: str):
         """Initialize UI Loader with configuration path."""
-        import json
         
         # Initialize component registry first
         self.component_registry = {

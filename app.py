@@ -18,19 +18,19 @@ def on_filter_apply():
     """Handle filter application"""
     # Get current display options
     display_options = {
-        "show_bfactor": st.session_state.get('show_bfactor', True),
-        "show_sasa": st.session_state.get('show_sasa', True),
-        "show_position": st.session_state.get('show_position', True),
-        "show_chain": st.session_state.get('show_chain', True)
+        "show_bfactor": st.session_state.show_bfactor,
+        "show_sasa": st.session_state.show_sasa,
+        "show_position": st.session_state.show_position,
+        "show_chain": st.session_state.show_chain
     }
     
     # Update current filters in session state
     current_filters = {
-        "residue_search": st.session_state.get('residue_search', ''),
-        "chain_filter": st.session_state.get('chain_filter', ['A']),
-        "b_factor_range": st.session_state.get('b_factor_range', [20, 80]),
-        "sec_structure": st.session_state.get('sec_structure', []),
-        "sasa_threshold": st.session_state.get('sasa_threshold', 50),
+        "residue_search": st.session_state.residue_search,
+        "chain_filter": st.session_state.chain_filter,
+        "b_factor_range": st.session_state.b_factor_range,
+        "sec_structure": st.session_state.sec_structure,
+        "sasa_threshold": st.session_state.sasa_threshold,
         "display_options": display_options
     }
     

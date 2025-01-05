@@ -24,124 +24,170 @@ class UIComponent(ABC):
 
 class TextInput(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a text input."""
         key = config['key']
-        default = config.get('default', '')
+        label = config.get('label', '')
+        placeholder = config.get('placeholder', '')
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('default', '')
+        else:
+            default = st.session_state[key]
         
         return st.text_input(
-            label=config['label'],
-            key=key,
-            placeholder=config.get('placeholder', ''),
-            value=self._get_session_value(key, default)
+            label=label,
+            value=default,
+            placeholder=placeholder,
+            key=key
         )
 
 class TextArea(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a text area."""
         key = config['key']
-        default = config.get('default', '')
+        label = config.get('label', '')
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('default', '')
+        else:
+            default = st.session_state[key]
         
         return st.text_area(
-            label=config['label'],
-            key=key,
-            value=self._get_session_value(key, default)
+            label=label,
+            value=default,
+            key=key
         )
 
 class MultiSelect(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a multiselect input."""
         key = config['key']
-        default = config.get('default', [])
+        label = config.get('label', '')
+        options = config.get('options', [])
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
-        
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('default', [])
+        else:
+            default = st.session_state[key]
+            
         return st.multiselect(
-            label=config['label'],
-            options=config['options'],
-            key=key,
-            default=self._get_session_value(key, default)
+            label=label,
+            options=options,
+            default=default,
+            key=key
         )
 
 class Select(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a select input."""
         key = config['key']
-        default = config.get('default', config['options'][0])
+        label = config.get('label', '')
+        options = config.get('options', [])
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
-        
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('default', options[0] if options else None)
+            if default is not None:
+                default_index = options.index(default)
+            else:
+                default_index = 0
+        else:
+            default = st.session_state[key]
+            default_index = options.index(default)
+            
         return st.selectbox(
-            label=config['label'],
-            options=config['options'],
-            key=key,
-            index=config['options'].index(self._get_session_value(key, default))
+            label=label,
+            options=options,
+            index=default_index,
+            key=key
         )
 
 class Slider(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a slider."""
         key = config['key']
-        default = config.get('value', [config['min'], config['max']])
+        label = config.get('label', '')
+        min_value = config.get('min', 0)
+        max_value = config.get('max', 100)
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('value', [min_value, max_value])
+        else:
+            default = st.session_state[key]
         
         return st.slider(
-            label=config['label'],
-            min_value=config['min'],
-            max_value=config['max'],
-            key=key,
-            value=self._get_session_value(key, default)
+            label=label,
+            min_value=min_value,
+            max_value=max_value,
+            value=default,
+            key=key
         )
 
 class NumberInput(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a number input."""
         key = config['key']
-        default = config.get('value', 0)
+        label = config.get('label', '')
+        min_value = config.get('min', 0)
+        max_value = config.get('max', 100)
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('value', 0)
+        else:
+            default = st.session_state[key]
         
         return st.number_input(
-            label=config['label'],
-            min_value=config.get('min', 0),
-            max_value=config.get('max', 100),
-            key=key,
-            value=self._get_session_value(key, default)
+            label=label,
+            min_value=min_value,
+            max_value=max_value,
+            value=default,
+            key=key
         )
 
 class Checkbox(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
+        """Render a checkbox."""
         key = config['key']
-        default = config.get('default', False)
+        label = config.get('label', '')
         
-        # Initialize session state if needed
-        self._get_session_value(key, default)
+        # Only use default if key is not in session state
+        if key not in st.session_state:
+            default = config.get('default', False)
+        else:
+            default = st.session_state[key]
         
         return st.checkbox(
-            label=config['label'],
-            key=key,
-            value=self._get_session_value(key, default)
+            label=label,
+            value=default,
+            key=key
         )
 
 class CheckboxGroup(UIComponent):
     def render(self, config: Dict[str, Any]) -> Any:
-        st.write(config['label'])
+        """Render a checkbox group."""
+        label = config.get('label', '')
+        items = config.get('items', [])
+        
         results = []
-        for item in config['items']:
+        for item in items:
             key = item['key']
-            default = item.get('default', False)
+            label = item.get('label', '')
             
-            # Initialize session state if needed
-            self._get_session_value(key, default)
+            # Only use default if key is not in session state
+            if key not in st.session_state:
+                default = item.get('default', False)
+            else:
+                default = st.session_state[key]
             
             result = st.checkbox(
-                label=item['label'],
-                key=key,
-                value=self._get_session_value(key, default)
+                label=label,
+                value=default,
+                key=key
             )
             results.append(result)
         return results
